@@ -1,7 +1,7 @@
 import type * as types from '../../lib/types'
 import { search } from '../../lib/notion'
 
-export const runtime = 'edge'
+export const config = { runtime: 'edge' }
 
 export default async function searchNotion(request: Request): Promise<Response> {
   if (request.method !== 'POST') {

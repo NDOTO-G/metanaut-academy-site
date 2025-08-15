@@ -8,10 +8,12 @@ import {
 } from 'notion-utils'
 import RSS from 'rss'
 
-import * as config from '@/lib/config'
+import * as siteConfig from '@/lib/config'
 import { getSiteMap } from '@/lib/get-site-map'
 import { getSocialImageUrl } from '@/lib/get-social-image-url'
 import { getCanonicalPageUrl } from '@/lib/map-page-url'
+
+export const config = { runtime: 'edge' }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
@@ -27,10 +29,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const ttlSeconds = ttlMinutes * 60
 
   const feed = new RSS({
-    title: config.name,
-    site_url: config.host,
-    feed_url: `${config.host}/feed.xml`,
-    language: config.language,
+    title: siteConfig.name,
+    site_url: siteConfig.host,
+    feed_url: `${siteConfig.host}/feed.xml`,
+    language: siteConfig.language,
     ttl: ttlMinutes
   })
 
@@ -47,16 +49,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const isBlogPost =
       block.type === 'page' &&
       block.parent_table === 'collection' &&
-      parentPage?.id === idToUuid(config.rootNotionPageId)
+      parentPage?.id === idToUuid(siteConfig.rootNotionPageId)
     if (!isBlogPost) {
       continue
     }
 
-    const title = getBlockTitle(block, recordMap) || config.name
+    const title = getBlockTitle(block, recordMap) || siteConfig.name
     const description =
       getPageProperty<string>('Description', block, recordMap) ||
-      config.description
-    const url = getCanonicalPageUrl(config.site, recordMap)(pageId)
+      siteConfig.description
+    const url = getCanonicalPageUrl(siteConfig.site, recordMap)(pageId)
     const lastUpdatedTime = getPageProperty<number>(
       'Last Updated',
       block,
@@ -100,4 +102,3 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function noop() {
   return null
 }
-export const runtime = 'edge'

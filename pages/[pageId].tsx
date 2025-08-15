@@ -6,6 +6,8 @@ import { getSiteMap } from '@/lib/get-site-map'
 import { resolveNotionPage } from '@/lib/resolve-notion-page'
 import { type PageProps, type Params } from '@/lib/types'
 
+export const config = { runtime: 'edge' }
+
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context
 ) => {
@@ -51,4 +53,4 @@ export async function getStaticPaths() {
 export default function NotionDomainDynamicPage(props: PageProps) {
   return <NotionPage {...props} />
 }
-export const runtime = 'edge'
+// removed duplicate runtime config; see top of file

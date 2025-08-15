@@ -2,6 +2,8 @@ import type { GetServerSideProps } from 'next'
 
 import { host } from '@/lib/config'
 
+export const config = { runtime: 'edge' }
+
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
     res.statusCode = 405
@@ -45,4 +47,3 @@ Sitemap: ${host}/sitemap.xml
 export default function noop() {
   return null
 }
-export const runtime = 'edge'

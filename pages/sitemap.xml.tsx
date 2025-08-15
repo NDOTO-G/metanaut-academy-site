@@ -4,6 +4,8 @@ import type { SiteMap } from '@/lib/types'
 import { host } from '@/lib/config'
 import { getSiteMap } from '@/lib/get-site-map'
 
+export const config = { runtime: 'edge' }
+
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
     res.statusCode = 405
@@ -58,4 +60,4 @@ export default function noop() {
   return null
 }
 
-export const runtime = 'edge'
+// removed duplicate runtime config; see top of file
