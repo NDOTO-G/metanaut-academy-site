@@ -1,5 +1,7 @@
 import { type GetStaticProps } from 'next'
 
+export const runtime = 'edge'
+
 import { NotionPage } from '@/components/NotionPage'
 import { domain, isDev } from '@/lib/config'
 import { getSiteMap } from '@/lib/get-site-map'

@@ -1,25 +1,27 @@
-import { type NextApiRequest, type NextApiResponse } from 'next'
-
 import type * as types from '../../lib/types'
 import { search } from '../../lib/notion'
 
-export default async function searchNotion(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).send({ error: 'method not allowed' })
+export const runtime = 'edge'
+
+export default async function searchNotion(request: Request): Promise<Response> {
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'method not allowed' }), {
+      status: 405,
+      headers: { 'content-type': 'application/json' }
+    })
   }
 
-  const searchParams: types.SearchParams = req.body
+  const searchParams = (await request.json()) as types.SearchParams
 
   console.log('<<< lambda search-notion', searchParams)
   const results = await search(searchParams)
   console.log('>>> lambda search-notion', results)
 
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
-  )
-  res.status(200).json(results)
+  return new Response(JSON.stringify(results), {
+    status: 200,
+    headers: {
+      'content-type': 'application/json',
+      'cache-control': 'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
+    }
+  })
 }

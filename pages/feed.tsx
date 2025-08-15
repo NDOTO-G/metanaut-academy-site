@@ -1,4 +1,6 @@
 import type { GetServerSideProps } from 'next'
+
+export const runtime = 'edge'
 import { type ExtendedRecordMap } from 'notion-types'
 import {
   getBlockParentPage,

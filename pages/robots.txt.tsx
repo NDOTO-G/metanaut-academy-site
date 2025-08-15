@@ -1,5 +1,7 @@
 import type { GetServerSideProps } from 'next'
 
+export const runtime = 'edge'
+
 import { host } from '@/lib/config'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
