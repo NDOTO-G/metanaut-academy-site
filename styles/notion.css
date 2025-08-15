@@ -403,3 +403,18 @@
 .notion-equation.notion-equation-block{
   align-items: center;
 }
+
+/* Put this at the very BOTTOM of styles/global.css */
+.notion [id="#61f40f6acb1c48eb94fb8f1f2cf6a9a7"],
+.notion [data-block-id="61f40f6acb1c48eb94fb8f1f2cf6a9a7"],
+.notion [data-block-id="61f40f6a-cb1c-48eb-94fb-8f1f2cf6a9a7"],
+.notion .notion-toggle-block [id="61f40f6acb1c48eb94fb8f1f2cf6a9a7"],
+.notion .notion-toggle-block [data-block-id="61f40f6acb1c48eb94fb8f1f2cf6a9a7"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+

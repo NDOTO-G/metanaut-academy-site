@@ -42,24 +42,21 @@ export default siteConfig({
   // any pages defined here will override their default URL paths
   // example:
   //
-  // pageUrlOverrides: {
-  //   '/foo': '067dd719a912471ea9a3ac10710e7fdf',
-  //   '/bar': '0be6efce9daf42688f65c76b89f8eb27'
-  // }
-  pageUrlOverrides: null,
+  pageUrlOverrides: {
+    '/classes': 'e88fd99185524090ad1dc8caad3e3338',
+    '/blog': 'f113fa29872f49cba57231440500a6d6',
+    '/contact': '2887e4e80470415586fbfb7ee6c1c1d4'
+  },
+  // pageUrlOverrides: null,
 
   // whether to use the default notion navigation style or a custom one with links to
   // important pages. To use `navigationLinks`, set `navigationStyle` to `custom`.
-  navigationStyle: 'default'
-  // navigationStyle: 'custom',
-  // navigationLinks: [
-  //   {
-  //     title: 'About',
-  //     pageId: 'f1199d37579b41cbabfc0b5174f4256a'
-  //   },
-  //   {
-  //     title: 'Contact',
-  //     pageId: '6a29ebcb935a4f0689fe661ab5f3b8d1'
-  //   }
-  // ]
+  // navigationStyle: 'default'
+  navigationStyle: 'custom',
+  navigationLinks: [
+  { title: 'Home',    pageId: '213e0a56290441aaace07354895bd113' }, // your root
+  { title: 'Classes', pageId: 'e88fd99185524090ad1dc8caad3e3338' },
+  { title: 'Blog',    pageId: 'f113fa29872f49cba57231440500a6d6' },
+  { title: 'Contact', pageId: '2887e4e80470415586fbfb7ee6c1c1d4' }
+]
 })
