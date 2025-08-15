@@ -40,3 +40,12 @@ export default withBundleAnalyzer({
   // See https://react-tweet.vercel.app/next#troubleshooting
   transpilePackages: ['react-tweet']
 })
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    runtime: 'edge' // makes pages Edge by default; per-file config still wins
+  }
+}
+
+// If you want to export nextConfig, use ES module export syntax
+export { nextConfig }
