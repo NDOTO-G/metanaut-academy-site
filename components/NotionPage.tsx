@@ -199,18 +199,18 @@ const HIDE = new Set(['61f40f6acb1c48eb94fb8f1f2cf6a9a7']); // your block
 if (recordMap?.block) {
   for (const [key, node] of Object.entries(recordMap.block as any)) {
     const val = (node as any)?.value;
-    const idNoHyphens = val?.id?.replace(/-/g, '');
+    const idNoHyphens = val?.id?.replaceAll('-', '');
 
     if (HIDE.has(idNoHyphens)) {
       // remove the block itself
       delete (recordMap.block as any)[key];
 
       // also remove it from its parent's content array (prevents empty shell)
-      const parentId = val?.parent_id?.replace(/-/g, '');
+      const parentId = val?.parent_id?.replaceAll('-', '');
       if (parentId && (recordMap.block as any)[parentId]?.value?.content) {
         const parent = (recordMap.block as any)[parentId].value;
         parent.content = parent.content.filter(
-          (cid: string) => cid.replace(/-/g, '') !== idNoHyphens
+          (cid: string) => cid.replaceAll('-', '') !== idNoHyphens
         );
       }
     }
