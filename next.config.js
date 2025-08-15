@@ -43,7 +43,7 @@ export default withBundleAnalyzer({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    runtime: 'edge' // makes pages Edge by default; per-file config still wins
+    runtime: 'experimental-edge' // makes pages Edge by default; per-file config still wins
   }
 }
 
