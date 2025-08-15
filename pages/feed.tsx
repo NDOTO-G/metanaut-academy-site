@@ -1,6 +1,4 @@
 import type { GetServerSideProps } from 'next'
-
-export const runtime = 'edge'
 import { type ExtendedRecordMap } from 'notion-types'
 import {
   getBlockParentPage,
@@ -102,3 +100,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function noop() {
   return null
 }
+export const runtime = 'edge'

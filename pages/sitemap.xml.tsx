@@ -1,7 +1,5 @@
 import type { GetServerSideProps } from 'next'
 
-export const runtime = 'edge'
-
 import type { SiteMap } from '@/lib/types'
 import { host } from '@/lib/config'
 import { getSiteMap } from '@/lib/get-site-map'
@@ -59,3 +57,5 @@ const createSitemap = (siteMap: SiteMap) =>
 export default function noop() {
   return null
 }
+
+export const runtime = 'edge'
