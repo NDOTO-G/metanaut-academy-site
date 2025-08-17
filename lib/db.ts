@@ -1,14 +1,7 @@
-import Keyv from '@keyvhq/core'
-import KeyvRedis from '@keyvhq/redis'
+import * as KeyvPkg from '@keyvhq/core'
 
-import { isRedisEnabled, redisNamespace, redisUrl } from './config'
-
-let db: Keyv
-if (isRedisEnabled) {
-  const keyvRedis = new KeyvRedis(redisUrl!)
-  db = new Keyv({ store: keyvRedis, namespace: redisNamespace || undefined })
-} else {
-  db = new Keyv()
-}
+// Workers-safe: always use in-memory Keyv to avoid bundling Node-only redis deps
+const KeyvCtor: any = (KeyvPkg as any).default || (KeyvPkg as any)
+const db = new KeyvCtor()
 
 export { db }

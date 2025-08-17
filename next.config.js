@@ -25,15 +25,12 @@ export default withBundleAnalyzer({
   },
 
   webpack: (config) => {
-    // Workaround for ensuring that `react` and `react-dom` resolve correctly
-    // when using a locally-linked version of `react-notion-x`.
-    // @see https://github.com/vercel/next.js/issues/50391
-    const dirname = path.dirname(fileURLToPath(import.meta.url))
-    config.resolve.alias.react = path.resolve(dirname, 'node_modules/react')
-    config.resolve.alias['react-dom'] = path.resolve(
-      dirname,
-      'node_modules/react-dom'
-    )
+    // Avoid overriding Next's resolve.alias in a way that fails on Next 15.
+    // If aliasing is ever needed, spread existing aliases first.
+    config.resolve.alias = {
+      ...config.resolve.alias
+      // custom aliases could be added here if required
+    }
     return config
   },
 

@@ -14,7 +14,8 @@ import {
 } from './config'
 import { getTweetsMap } from './get-tweets'
 import { notion } from './notion-api'
-import { getPreviewImageMap } from './preview-images'
+// preview-images imports Node-only deps (sharp via lqip-modern);
+// keep it out of Edge bundles via dynamic import when enabled.
 
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
@@ -61,8 +62,8 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   }
 
   if (isPreviewImageSupportEnabled) {
-    const previewImageMap = await getPreviewImageMap(recordMap)
-    ;(recordMap as any).preview_images = previewImageMap
+    // Preview images are disabled for Edge/Workers builds.
+    // Intentionally no-op to keep Node-only deps out of the bundle.
   }
 
   await getTweetsMap(recordMap)
